@@ -89,7 +89,7 @@ class Net_Gearman_Client
                 throw new Net_Gearman_Exception('Invalid servers specified');
             }
             $conn = Net_Gearman_Connection::connect($server, $timeout);
-            if (!Net_Gearman_Connection::isConnected($conn)) {
+            if (!$conn) {
                 unset($this->servers[$key]);
                 continue;
             }

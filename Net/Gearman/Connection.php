@@ -156,13 +156,14 @@ class Net_Gearman_Connection
             if ($socket_connected) {
                 socket_set_nonblock($socket);
                 socket_set_option($socket, SOL_TCP, 1, 1);
-                $timeLeft = ((microtime(true) - $start) * 1000);
             }
+            $timeLeft = ((microtime(true) - $start) * 1000);
         } while (!$socket_connected && $timeLeft < $timeout);
 
         if (!$socket_connected) {
             $errno = socket_last_error($socket);
             $errstr	= socket_strerror($errno);
+            return false;
             throw new Net_Gearman_Exception(
                 "Can't connect to server ($errno: $errstr)"
             );
