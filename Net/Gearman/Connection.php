@@ -161,12 +161,7 @@ class Net_Gearman_Connection
         } while (!$socket_connected && $timeLeft < $timeout);
 
         if (!$socket_connected) {
-            $errno = socket_last_error($socket);
-            $errstr	= socket_strerror($errno);
             return false;
-            throw new Net_Gearman_Exception(
-                "Can't connect to server ($errno: $errstr)"
-            );
         }
 
         self::$waiting[(int)$socket] = array();
